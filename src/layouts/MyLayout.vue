@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-layout-header>
       <q-toolbar
-        color="primary"
+        color="light-blue-10"
         :glossy="$q.theme === 'mat'"
         :inverted="$q.theme === 'ios'"
       >
@@ -17,8 +17,8 @@
         </q-btn>
 
         <q-toolbar-title>
-          Quasar App
-          <div slot="subtitle">Running on Quasar v{{ $q.version }}</div>
+          Incident Manager
+          <div slot="subtitle">{{ companyName }}</div>
         </q-toolbar-title>
       </q-toolbar>
     </q-layout-header>
@@ -27,35 +27,48 @@
       v-model="leftDrawerOpen"
       :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null"
     >
-      <q-list
-        no-border
-        link
-        inset-delimiter
-      >
-        <q-list-header>Essential Links</q-list-header>
-        <q-item @click.native="openURL('http://quasar-framework.org')">
-          <q-item-side icon="school" />
-          <q-item-main label="Docs" sublabel="quasar-framework.org" />
+      <q-toolbar
+        color="teal-7"
+        :glossy="$q.theme === 'mat'"
+        :inverted="$q.theme === 'ios'"
+        ><q-toolbar-title>
+          Incident Manager
+          <div slot="subtitle">{{ companyName }}</div>
+        </q-toolbar-title>
+      </q-toolbar>
+      <q-list no-border class="q-mt-sm">
+        <q-item>
+          <q-item-side icon="fas fa-medkit"/>
+          <q-item-main label="Incident/Event"/>
         </q-item>
-        <q-item @click.native="openURL('https://github.com/quasarframework/')">
-          <q-item-side icon="code" />
-          <q-item-main label="GitHub" sublabel="github.com/quasarframework" />
+        <q-item >
+          <q-item-side icon="fas fa-exclamation-circle"/>
+          <q-item-main label="Near Incident (Near Miss)"/>
         </q-item>
-        <q-item @click.native="openURL('https://discord.gg/5TDhbDg')">
-          <q-item-side icon="chat" />
-          <q-item-main label="Discord Chat Channel" sublabel="https://discord.gg/5TDhbDg" />
+        <q-item >
+          <q-item-side icon="fas fa-bolt"/>
+          <q-item-main label="Potential Hazard"/>
         </q-item>
-        <q-item @click.native="openURL('http://forum.quasar-framework.org')">
-          <q-item-side icon="record_voice_over" />
-          <q-item-main label="Forum" sublabel="forum.quasar-framework.org" />
+        <q-item >
+          <q-item-side icon="far fa-eye"/>
+          <q-item-main label="Safety Observation"/>
         </q-item>
-        <q-item @click.native="openURL('https://twitter.com/quasarframework')">
-          <q-item-side icon="rss feed" />
-          <q-item-main label="Twitter" sublabel="@quasarframework" />
+        <q-item >
+          <q-item-side icon="fas fa-comments"/>
+          <q-item-main label="Suggestion for Improvement"/>
+        </q-item>
+      </q-list>
+      <q-list no-border style="position: fixed; bottom:0">
+        <q-item>
+          <q-item-side icon="fas fa-user" />
+          <q-item-main label="User Profile" />
+        </q-item>
+        <q-item>
+          <q-item-side icon="fas fa-bell" />
+          <q-item-main label="Notifications" />
         </q-item>
       </q-list>
     </q-layout-drawer>
-
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -69,7 +82,8 @@ export default {
   name: 'MyLayout',
   data () {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop
+      leftDrawerOpen: this.$q.platform.is.desktop,
+      companyName: 'Apex Car Rentals'
     }
   },
   methods: {
@@ -78,5 +92,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  .q-item {
+    margin-bottom: 20px;
+  }
+
 </style>
