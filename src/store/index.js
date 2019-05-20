@@ -1,19 +1,37 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import example from './module-example'
-
 Vue.use(Vuex)
-
-/*
- * If not building with SSR mode, you can
- * directly export the Store instantiation
- */
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
-    modules: {
-      example
+    state: {
+      header: {},
+      user: {
+        name: 'Shilo Kherington'
+      }
+    },
+    mutations: {
+      setHeader (state, payload) {
+        state.header = payload
+      },
+      setUser (state, payload) {
+        state.user = payload
+      }
+    },
+    actions: {
+      updateHeader ({ commit }, payload) {
+        let header = payload
+        commit('setHeader', header)
+      },
+      updateUser ({ commit }, payload) {
+        let user = payload
+        commit('setUser', user)
+      }
+    },
+    getters: {
+      header: (state) => state.header,
+      user: (state) => state.user
     }
   })
 
